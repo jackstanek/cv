@@ -10,7 +10,18 @@
       docname = "cv";
       pkgs = nixpkgs.legacyPackages.${system};
       tex = pkgs.texlive.combine {
-          inherit (pkgs.texlive) scheme-minimal latex-bin latexmk;
+        inherit
+          (pkgs.texlive)
+          scheme-small
+          academicons
+          arydshln
+          fontawesome5
+          latex-bin
+          latexmk
+          marvosym
+          moderncv
+          multirow
+        ;
       };
     in rec {
       packages = {
