@@ -1,0 +1,8 @@
+*.log
+*.aux
+*.fls
+*.pdf
+*.out
+result
+*_latexmk
+.cache
