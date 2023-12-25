@@ -1,23 +1,92 @@
-\documentclass{moderncv}
-\moderncvtheme[blue]{classic}
-\usepackage[utf8]{inputenc}
+\documentclass{article}
 
-\usepackage[scale=0.8]{geometry}
-\recomputelengths
+\usepackage{ebgaramond}
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{xcolor}
 
-\firstname{Jack}
-\familyname{Stanek}
-\title{PhD Student}
-\address{1210 W Dayton St, Madison WI 53706}
-\email{jstanek@cs.wisc.edu}
+\newcommand{\FirstName}{Jack}
+\newcommand{\LastName}{Stanek}
+\newcommand{\Title}{PhD Student}
+\newcommand{\Institution}{University of Wisconsin--Madison}
+\newcommand{\DeptURL}{https://cs.wisc.edu}
+\newcommand{\Address}{1210 W Dayton St, Madison, WI 53715}
+\newcommand{\Email}{\href{mailto:jstanek@cs.wisc.edu}{jstanek@cs.wisc.edu}}
+
+\newcommand{\EntryHeader}[1]{\multicolumn{2}{l}{\large\textbf{#1}}\\}
+
+% Arguments:
+% Degree
+% Institution
+% Location
+% Start year
+% End year
+\newcommand{\ExpEntry}[5]{{#4---#5}&\textbf{#1} \\ &\textit{#2} (#3)\\}
+
+% Arguments:
+% Course number
+% Course name
+% Institution
+% Semester
+\newcommand{\TeachEntry}[3]{#3&\textbf{#1:} #2\\}
+
+% Arguments:
+% Award
+% Year
+\newcommand{\AwardEntry}[2]{#2&\textbf{#1}\\}
+
+\newenvironment{Entries}
+{\tabularx{\textwidth}{
+    >{\hsize=.5\hsize\raggedleft\arraybackslash}p{4cm}
+    >{\hsize=1.5\hsize\raggedright\arraybackslash}l}}
+{\endtabularx}
+
+\setlength{\parindent}{0pt}
+
+\pagestyle{empty}
+
+\hypersetup{
+  colorlinks=true,
+  urlcolor=black,
+}
+
 
 \begin{document}
-\maketitle
 
-\section{Education}
-\cventry{2023--current}{Ph.D}{University of Wisconsin}{Madison, WI}{}{}
-\cventry{2015--2019}{B.S.}{University of Minnesota}{Minneapolis, MN}{\textit{3.75}}{}
+% Header; center name, affiliations, and contact details around
+% center of page
+\begin{tabularx}{\textwidth}{>{\raggedleft\arraybackslash}XX}
+  {\huge\textbf{\FirstName}}&{\huge\textbf{\LastName}}\\[10pt]
+  \Title&\href{\DeptURL}{\Institution}\\
+  \Email&\Address\\
+\end{tabularx}
 
-\section{Industry Experience}
-\cventry{2019--2023}{Software Engineer}{Hewlett Packard Enterprise}{Minneapolis, MN}{}{}
+\section*{Education}
+
+\begin{Entries}
+  \ExpEntry{PhD in Computer Science}{University of Wisconsin--Madison}{Madison, WI}{2023}{current}
+  \ExpEntry{BS in Computer Science}{University of Minnesota--Twin Cities}{Minneapolis, MN}{2015}{2019}
+\end{Entries}
+
+\section*{Industry Experience}
+
+\begin{Entries}
+  \ExpEntry{Software Engineer}{Hewlett Packard Enterprise}{Minneapolis, MN}{2019}{2023}
+\end{Entries}
+
+\section*{Awards and Honors}
+\begin{Entries}
+  \AwardEntry{Robert E. Rice Scholarship}{Fall 2015}
+\end{Entries}
+
+\section*{Teaching}
+
+\begin{Entries}
+  \EntryHeader{Graduate TA}
+  \TeachEntry{CS 577}{Introduction to Algorithms}{Spring 2024}
+  \TeachEntry{CS 559}{Computer Graphics}{Fall 2023}
+\end{Entries}
+
 \end{document}

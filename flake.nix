@@ -13,17 +13,12 @@
           inherit
             (pkgs.texlive)
             scheme-small
-            academicons
-            arydshln
-            fontawesome5
-            latex-bin
             latexmk
-            marvosym
-            moderncv
             multirow
+            ebgaramond
           ;
         };
-        deps = with pkgs; [ tex coreutils just bash ];
+        deps = with pkgs; [ tex coreutils just bash texlab ];
       in rec {
         devShells.default = pkgs.mkShell {
           buildInputs = deps;
@@ -44,7 +39,7 @@
             '';
             installPhase = ''
               mkdir -p $out
-              cp ${docname}.pdf $out/
+              cp build/${docname}.pdf $out/
             '';
           };
         };
