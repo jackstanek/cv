@@ -1,92 +1,118 @@
-\documentclass{article}
-
-\usepackage{ebgaramond}
-\usepackage[letterpaper,margin=1in]{geometry}
-\usepackage{microtype}
+\documentclass{article} % Default font size and paper size
+\usepackage[margin=1in]{geometry}
+\usepackage{array}
 \usepackage{hyperref}
-\usepackage{tabularx}
-\usepackage{xcolor}
 
-\newcommand{\FirstName}{Jack}
-\newcommand{\LastName}{Stanek}
-\newcommand{\Title}{PhD Student}
-\newcommand{\Institution}{University of Wisconsin--Madison}
-\newcommand{\DeptURL}{https://cs.wisc.edu}
-\newcommand{\Address}{1210 W Dayton St, Madison, WI 53715}
-\newcommand{\Email}{\href{mailto:jstanek@cs.wisc.edu}{jstanek@cs.wisc.edu}}
+\setcounter{secnumdepth}{0}  % Remove section numbering
 
-\newcommand{\EntryHeader}[1]{\multicolumn{2}{l}{\large\textbf{#1}}\\}
-
-% Arguments:
-% Degree
-% Institution
-% Location
-% Start year
-% End year
-\newcommand{\ExpEntry}[5]{{#4---#5}&\textbf{#1} \\ &\textit{#2} (#3)\\}
-
-% Arguments:
-% Course number
-% Course name
-% Institution
-% Semester
-\newcommand{\TeachEntry}[3]{#3&\textbf{#1:} #2\\}
-
-% Arguments:
-% Award
-% Year
-\newcommand{\AwardEntry}[2]{#2&\textbf{#1}\\}
-
-\newenvironment{Entries}
-{\tabularx{\textwidth}{
-    >{\hsize=.5\hsize\raggedleft\arraybackslash}p{4cm}
-    >{\hsize=1.5\hsize\raggedright\arraybackslash}l}}
-{\endtabularx}
-
-\setlength{\parindent}{0pt}
-
-\pagestyle{empty}
-
-\hypersetup{
-  colorlinks=true,
-  urlcolor=black,
-}
-
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 \begin{document}
 
-% Header; center name, affiliations, and contact details around
-% center of page
-\begin{tabularx}{\textwidth}{>{\raggedleft\arraybackslash}XX}
-  {\huge\textbf{\FirstName}}&{\huge\textbf{\LastName}}\\[10pt]
-  \Title&\href{\DeptURL}{\Institution}\\
-  \Email&\Address\\
-\end{tabularx}
+\pagestyle{empty} % Removes page numbering
 
-\section*{Education}
+\begin{center}
+    \par{\Huge Jack Stanek\bigskip\par} % Your name
 
-\begin{Entries}
-  \ExpEntry{PhD in Computer Science}{University of Wisconsin--Madison}{Madison, WI}{2023}{current}
-  \ExpEntry{BS in Computer Science}{University of Minnesota--Twin Cities}{Minneapolis, MN}{2015}{2019}
-\end{Entries}
+    \begin{tabular}{rl}
+        \textsc{Address:} & 1210 W Dayton St, Madison WI 53706 \\
+        \textsc{Email:} & \href{mailto:jstanek@cs.wisc.edu}{jstanek@cs.wisc.edu}
+    \end{tabular}
+\end{center}
 
-\section*{Industry Experience}
+%----------------------------------------------------------------------------------------
+%	EDUCATION
+%----------------------------------------------------------------------------------------
 
-\begin{Entries}
-  \ExpEntry{Software Engineer}{Hewlett Packard Enterprise}{Minneapolis, MN}{2019}{2023}
-\end{Entries}
+\section{Education}
 
-\section*{Awards and Honors}
-\begin{Entries}
-  \AwardEntry{Robert E. Rice Scholarship}{Fall 2015}
-\end{Entries}
+\begin{tabular}{R{4cm}p{11cm}}
+    \textsc{Sep 2023 -- Current} & \textbf{University of Wisconsin -- Madison} --- \textit{Ph.D} \\
+    & GPA: 4.0 / 4.0\\
+    \textsc{Sep 2015 -- May 2019} & \textbf{University of Minnesota -- Twin Cities} --- \textit{B.S., with distinction} \\
+    & GPA: 3.8 / 4.0\\
+\end{tabular}
 
-\section*{Teaching}
+%----------------------------------------------------------------------------------------
+%	WORK EXPERIENCE 
+%----------------------------------------------------------------------------------------
 
-\begin{Entries}
-  \EntryHeader{Graduate TA}
-  \TeachEntry{CS 577}{Introduction to Algorithms}{Spring 2024}
-  \TeachEntry{CS 559}{Computer Graphics}{Fall 2023}
-\end{Entries}
+\section{Research Experience}
+
+\begin{tabular}{R{4cm}p{11cm}}
+     \textsc{Jan 2024 -- May 2024} & \textit{Gradual Information Flow Types with Secure Downgrading} \\
+     & \footnotesize (Under the supervision of Ethan Cecchetti) \\
+     & \small Incorporating secure downgrading (robust declassification and transparent endorsement) into a programming language with \emph{gradual information flow labels} \\
+\end{tabular}
+
+\section{Industry Experience}
+
+\begin{tabular}{R{4cm}p{11cm}}
+\textsc{Feb 2019 -- Jul 2023} & \textbf{Cray, Inc. / Hewlett Packard Enterprise} --- \textit{Software Engineer}\\ 
+& \small Developed \emph{system management tooling} for the Cray EX line of exascale supercomputers\\
+
+%------------------------------------------------
+
+\textsc{Jun 2018 -- Aug 2018} & \textbf{Delta Air Lines} --- \textit{Software Engineering Intern} \\
+& \small Developed \emph{migration tooling} for version control transition \\
+
+%------------------------------------------------
+
+\textsc{Jun 2017 -- Mar 2017} & \textbf{Cray, Inc.} --- \textit{Software Engineering Intern} \\
+& \small Developed \emph{operating system image provisioning tooling} for Cray XC  supercomputers \\
+\end{tabular}
+
+\section{Teaching}
+
+\subsection{Teaching Assistantships}
+\begin{tabular}{R{4cm}p{11cm}}
+    \textsc{Spring 2025} & CS 536: Intro to Compilers \\
+    \textsc{Fall 2024} & CS 559: Intro to Computer Graphics \\
+    \textsc{Spring 2024} & CS 577: Intro to Algorithms \\
+    \textsc{Fall 2023} & CS 559: Intro to Computer Graphics \\
+\end{tabular}
+
+%----------------------------------------------------------------------------------------
+%	SCHOLARSHIPS AND ADDITIONAL INFO
+%----------------------------------------------------------------------------------------
+
+\section{Awards and Honors}
+
+\begin{tabular}{R{4cm}p{11cm}}
+    \textsc{May 2017 -- May 2019} & College of Science and Engineering Dean's List\\
+    & \footnotesize University of Minnesota\\
+    \textsc{May 2015} & Robert E. Rice Computer Engineering Scholarship\\
+    & \footnotesize University of Minnesota\\
+\end{tabular}
+
+%----------------------------------------------------------------------------------------
+%	PROGRAMMING LANGUAGES 
+%----------------------------------------------------------------------------------------
+
+\section{Programming Languages}
+
+\begin{tabular}{R{4cm}p{11cm}}
+    \textsc{Python, Java} & High proficiency \\
+    \textsc{Rust, Haskell, OCaml, C++} & Moderate proficiency \\
+    \textsc{Clojure} & Some experience \\
+\end{tabular}
+
+
+%----------------------------------------------------------------------------------------
+%	LANGUAGES
+%----------------------------------------------------------------------------------------
+
+\section{Natural Languages}
+
+\begin{tabular}{R{4cm}l}
+    \textsc{English} & Native fluency \\
+    \textsc{German} & Working proficiency \\
+\end{tabular}
+
+
+\section{Interests}
+
+Automated verification, model theory, program synthesis, type systems, abstract interpretation
 
 \end{document}
