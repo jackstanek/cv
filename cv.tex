@@ -2,65 +2,113 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{array}
 \usepackage{hyperref}
+\usepackage{enumitem} % Added for better list control
+\usepackage{multirow}
+\usepackage{titlesec} % Added to control section spacing
+\usepackage{ebgaramond}
 
 \setcounter{secnumdepth}{0}  % Remove section numbering
 
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
+\hypersetup{
+  colorlinks=true,
+  urlcolor=blue,
+}
+
+% Command to reduce spacing around all section titles
+\titlespacing*{\section}{0pt}{0.5\baselineskip}{0.3\baselineskip}
+
 \begin{document}
 
 \pagestyle{empty} % Removes page numbering
 
-\begin{center}
-    \par{\Huge Jack Stanek\bigskip\par} % Your name
+% --- HEADER ---
+\noindent % To prevent indentation
+\begin{tabular}{@{}l @{\hspace{2em}} | l @{\extracolsep{\fill}}}
+\multirow{3}{*}{\Huge Jack Stanek}
+    & \href{mailto:jstanek@cs.wisc.edu}{jstanek@cs.wisc.edu} \\
+    & \href{https://jackstanek.github.io}{https://jackstanek.github.io} \\
+    & 1205 University Ave, Madison WI 53706 \\
+\end{tabular}
 
-    \begin{tabular}{rl}
-        \textsc{Address:} & 1210 W Dayton St, Madison WI 53706 \\
-        \textsc{Email:} & \href{mailto:jstanek@cs.wisc.edu}{jstanek@cs.wisc.edu}
-    \end{tabular}
-\end{center}
+% --- END HEADER ---
 
 %----------------------------------------------------------------------------------------
-%	EDUCATION
+%   EDUCATION
 %----------------------------------------------------------------------------------------
 
 \section{Education}
 
 \begin{tabular}{R{4cm}p{11cm}}
-    \textsc{Sep 2023 -- Current} & \textbf{University of Wisconsin -- Madison} --- \textit{Ph.D} \\
-    & GPA: 4.0 / 4.0\\
-    \textsc{Sep 2015 -- May 2019} & \textbf{University of Minnesota -- Twin Cities} --- \textit{B.S., with distinction} \\
+    \textsc{Sep 2023 -- Current} & \textbf{University of Wisconsin -- Madison} \\
+    & \emph{PhD in Computer Science} \\
+    \textsc{Sep 2023 -- Dec 2025} & \textbf{University of Wisconsin -- Madison} \\
+    & \emph{MS in Computer Science} \\
+    & GPA: 4.0 / 4.0 \\
+    \textsc{Sep 2015 -- May 2019} & \textbf{University of Minnesota -- Twin Cities} \\
+    & \emph{BS in Computer Science; awarded with distinction} \\
     & GPA: 3.8 / 4.0\\
 \end{tabular}
 
 %----------------------------------------------------------------------------------------
-%	WORK EXPERIENCE 
+%   WORK EXPERIENCE 
 %----------------------------------------------------------------------------------------
 
 \section{Research Experience}
 
 \begin{tabular}{R{4cm}p{11cm}}
-     \textsc{Jan 2024 -- May 2024} & \textit{Gradual Information Flow Types with Secure Downgrading} \\
-     & \footnotesize (Under the supervision of Ethan Cecchetti) \\
-     & \small Incorporating secure downgrading (robust declassification and transparent endorsement) into a programming language with \emph{gradual information flow labels} \\
+    \textsc{Jan 2025 -- Current} & \textbf{Learning Stochastic Summaries of Structured Data} \\
+    & \footnotesize (Under the supervision of \href{https://muraliadithya.github.io/}{Adithya Murali}) \\
+    \multicolumn{2}{L{15cm}}{
+        \small
+        \begin{itemize}[leftmargin=*, nosep]
+            \item Currently designing a program synthesis framework that uses neural and Monte Carlo methods to model recursively structured data for use in data obfuscation, program testing, and synthetic data generation
+            \item Developed a prototype algorithm to construct diverse sets of models of logical formulas, helping proof engineers uncover cognitive blind spots and construct non-obvious counter-examples in verification workflows 
+        \end{itemize}
+     } \\
+     \textsc{Jan 2024 -- May 2024} & \textbf{Gradual Information Flow Types with Secure Downgrading} \\
+     & \footnotesize (Under the supervision of \href{https://cecchetti.sites.cs.wisc.edu/}{Ethan Cecchetti}) \\
+     \multicolumn{2}{L{15cm}}{
+        \small
+        \begin{itemize}[leftmargin=*, nosep]
+            \item Formalized a core calculus, operational semantics, and type system for a language with gradual information flow labels
+            \item Developed a type system-based mechanism to enforce robust declassification and transparent endorsement to unify flexible non-interference with gradual type systems
+        \end{itemize}
+    } \\
 \end{tabular}
+
+% \section{Publications}
+% \begin{tabular}{R{4cm}p{11cm}}
+%     \textsc{In Preparation} & Learning Stochastic Summaries of Structured Data with Probabilistic Program Synthesis\\
+% \end{tabular}
 
 \section{Industry Experience}
 
 \begin{tabular}{R{4cm}p{11cm}}
 \textsc{Feb 2019 -- Jul 2023} & \textbf{Cray, Inc. / Hewlett Packard Enterprise} --- \textit{Software Engineer}\\ 
-& \small Developed \emph{system management tooling} for the Cray EX line of exascale supercomputers\\
+\multicolumn{2}{L{15cm}}{
+    \begin{itemize}[leftmargin=*, nosep]
+        \item Implemented an end-to-end automated hardware maintenance package in Python which dramatically reduced system downtime from days to hours and eliminated human error from repair procedures and diagnostics
+        \item Developed an automated framework to radically simplify deployment of the system management stack across the full line of Cray EX exascale supercomputers, creating a standardized experience for field engineers and administrators
+        \item Designed key hardware observability features in system administrator-oriented tooling, enabling a comprehensive system-wide view of hardware state to speed up routine management and diagnostic tasks
+    \end{itemize}
+} \\
 
-%------------------------------------------------
+\end{tabular}
 
-\textsc{Jun 2018 -- Aug 2018} & \textbf{Delta Air Lines} --- \textit{Software Engineering Intern} \\
-& \small Developed \emph{migration tooling} for version control transition \\
+%----------------------------------------------------------------------------------------
+%   TECHNICAL SKILLS
+%----------------------------------------------------------------------------------------
 
-%------------------------------------------------
+\section{Technical Skills}
 
-\textsc{Jun 2017 -- Mar 2017} & \textbf{Cray, Inc.} --- \textit{Software Engineering Intern} \\
-& \small Developed \emph{operating system image provisioning tooling} for Cray XC  supercomputers \\
+\begin{tabular}{R{4cm}p{11cm}}
+    \textsc{Languages} & Python, Rust, C++, Haskell, Java, OCaml \\
+    \textsc{Verification \& PL} & Formal semantics, type systems, program synthesis, proof assistants \\
+    \textsc{Machine Learning} & PyTorch, NumPy, probabilistic programming, Monte Carlo methods \\
+    \textsc{DevOps \& Cloud} & Linux, Docker, Kubernetes, CI/CD, Ansible \\
 \end{tabular}
 
 \section{Teaching}
@@ -73,8 +121,14 @@
     \textsc{Fall 2023} & CS 559: Intro to Computer Graphics \\
 \end{tabular}
 
+\section{Conferences and Workshops}
+
+\begin{tabular}{R{4cm}p{11cm}}
+    \textsc{June 2024} & \href{https://www.cs.uoregon.edu/research/summerschool/summer24/}{Oregon Programming Languages Summer School} \\
+\end{tabular}
+
 %----------------------------------------------------------------------------------------
-%	SCHOLARSHIPS AND ADDITIONAL INFO
+%   SCHOLARSHIPS AND ADDITIONAL INFO
 %----------------------------------------------------------------------------------------
 
 \section{Awards and Honors}
@@ -87,32 +141,14 @@
 \end{tabular}
 
 %----------------------------------------------------------------------------------------
-%	PROGRAMMING LANGUAGES 
+%   LANGUAGES
 %----------------------------------------------------------------------------------------
 
-\section{Programming Languages}
-
-\begin{tabular}{R{4cm}p{11cm}}
-    \textsc{Python, Java} & High proficiency \\
-    \textsc{Rust, Haskell, OCaml, C++} & Moderate proficiency \\
-    \textsc{Clojure} & Some experience \\
-\end{tabular}
-
-
-%----------------------------------------------------------------------------------------
-%	LANGUAGES
-%----------------------------------------------------------------------------------------
-
-\section{Natural Languages}
+\section{Spoken Languages}
 
 \begin{tabular}{R{4cm}l}
     \textsc{English} & Native fluency \\
     \textsc{German} & Working proficiency \\
 \end{tabular}
-
-
-\section{Interests}
-
-Automated verification, model theory, program synthesis, type systems, abstract interpretation
 
 \end{document}

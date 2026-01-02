@@ -16,6 +16,8 @@
             latexmk
             multirow
             ebgaramond
+            enumitem
+            titlesec
           ;
         };
         deps = with pkgs; [ tex coreutils just bash texlab ];
