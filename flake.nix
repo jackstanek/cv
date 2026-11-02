@@ -1,7 +1,7 @@
 {
   description = "CV";
   inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs/nixos-23.05;
+    nixpkgs.url = github:NixOS/nixpkgs/nixos-26.05;
     flake-utils.url = github:numtide/flake-utils;
   };
   outputs = { self, nixpkgs, flake-utils }:
@@ -9,18 +9,7 @@
       let
         docname = "cv";
         pkgs = nixpkgs.legacyPackages.${system};
-        tex = pkgs.texlive.combine {
-          inherit
-            (pkgs.texlive)
-            scheme-small
-            latexmk
-            multirow
-            ebgaramond
-            enumitem
-            titlesec
-          ;
-        };
-        deps = with pkgs; [ tex coreutils just bash texlab ];
+        deps = with pkgs; [ texliveFull coreutils just bash texlab nixfmt ];
       in rec {
         devShells.default = pkgs.mkShell {
           buildInputs = deps;

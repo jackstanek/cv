@@ -1,0 +1,122 @@
+% Publication list style for the CV: a right-aligned small-caps status/year
+% column matching the R{4cm}p{11cm} tables, title first, own name in bold,
+% and bracketed links ([preprint], [pdf], [doi], [arXiv]).
+\ProvidesFile{cvpubs.bbx}[2026/11/01 CV publication list]
+
+\RequireBibliographyStyle{standard}
+
+\ExecuteBibliographyOptions{
+  sorting=ydnt,
+  giveninits=true,
+  maxnames=99,
+  minnames=99,
+}
+
+% --- Left column: the status for unpublished work, otherwise the short venue
+% name from shortjournal (e.g. "POPL 2027"), falling back to series (where ACM
+% exports put "POPL '27"), then the year
+\DefineBibliographyStrings{english}{
+  inpreparation = {In Preparation},
+  submitted     = {Under Review},
+  forthcoming   = {To Appear},
+  inpress       = {In Press},
+  prepublished  = {Preprint},
+}
+
+\newbibmacro*{cv:label}{%
+  \iffieldundef{pubstate}
+    {\iffieldundef{shortjournal}
+       {\iffieldundef{series}
+          {\printfield{year}}
+          {\printfield[cv:label]{series}}}
+       {\printfield[cv:label]{shortjournal}}}
+    {\printfield{pubstate}}}
+
+% --- Names: "J. Stanek, A. Murali", with \highlightname{Family}{Given} bolded
+\DeclareNameAlias{default}{given-family}
+\DeclareDelimFormat{finalnamedelim}{\addcomma\space}
+
+\def\cv@hlfamily{}
+\def\cv@hlgiven{}
+\newcommand*{\highlightname}[2]{%
+  \def\cv@hlfamily{#1}%
+  \def\cv@hlgiven{#2}}
+
+\renewcommand*{\mkbibcompletename}[1]{%
+  \ifboolexpr{
+    test {\ifdefequal{\namepartfamily}{\cv@hlfamily}}
+    and test {\ifdefequal{\namepartgiven}{\cv@hlgiven}}
+  }
+    {\mkbibbold{#1}}
+    {#1}}
+
+% --- Field formats
+\DeclareFieldFormat*{title}{#1}
+\DeclareFieldFormat{cv:label}{#1}
+\DeclareFieldFormat{cv:venue}{\mkbibemph{#1}}
+\DeclareFieldFormat{url}{%
+  \mkbibbrackets{\href{#1}{\iffieldundef{pubstate}{pdf}{preprint}}}}
+\DeclareFieldFormat{doi}{\mkbibbrackets{\href{https://doi.org/#1}{doi}}}
+\DeclareFieldFormat{eprint:arxiv}{%
+  \mkbibbrackets{\href{https://arxiv.org/abs/#1}{arXiv}}}
+
+% --- Layout: hanging list aligned with the CV's two-column tables
+\defbibenvironment{bibliography}
+  {\list
+     {\usebibmacro{cv:label}}
+     {\setlength{\labelwidth}{4cm}%
+      \setlength{\labelsep}{2\tabcolsep}%
+      \setlength{\leftmargin}{\dimexpr\labelwidth+3\tabcolsep\relax}%
+      \setlength{\rightmargin}{\dimexpr\linewidth-\leftmargin-11cm\relax}%
+      \setlength{\itemindent}{0pt}%
+      \setlength{\topsep}{0pt}%
+      \setlength{\partopsep}{0pt}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}%
+      \renewcommand*{\makelabel}[1]{\hfil\textsc{##1}}}}
+  {\endlist}
+  {\item}
+
+% --- Entry body: Title. Authors. Venue, Year. [links]
+\newbibmacro*{cv:links}{%
+  \printfield{url}%
+  \setunit*{\addspace}%
+  \printfield{doi}%
+  \setunit*{\addspace}%
+  \iffieldequalstr{eprinttype}{arxiv}{\printfield{eprint}}{}}
+
+\newbibmacro*{cv:entry}{%
+  \printfield{title}%
+  \newunit\newblock
+  \printnames{author}%
+  \newunit\newblock
+  \iffieldundef{journaltitle}
+    {\printfield[cv:venue]{booktitle}}
+    {\printfield[cv:venue]{journaltitle}}%
+  \ifboolexpr{
+    test {\iffieldundef{journaltitle}}
+    and test {\iffieldundef{booktitle}}
+  }
+    {}
+    {\setunit{\addcomma\space}}%
+  \printfield{year}%
+  \ifboolexpr{
+    test {\iffieldundef{url}}
+    and test {\iffieldundef{doi}}
+    and test {\iffieldundef{eprint}}
+  }
+    {}
+    {\setunit{\addperiod\space}%
+     \usebibmacro{cv:links}%
+     \renewcommand*{\finentrypunct}{}}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{article}{\usebibmacro{cv:entry}}
+\DeclareBibliographyDriver{inproceedings}{\usebibmacro{cv:entry}}
+\DeclareBibliographyDriver{online}{\usebibmacro{cv:entry}}
+\DeclareBibliographyDriver{misc}{\usebibmacro{cv:entry}}
+\DeclareBibliographyDriver{unpublished}{\usebibmacro{cv:entry}}
+\DeclareBibliographyDriver{report}{\usebibmacro{cv:entry}}
+\DeclareBibliographyDriver{thesis}{\usebibmacro{cv:entry}}
+
+\endinput

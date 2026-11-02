@@ -5,7 +5,17 @@
 \usepackage{enumitem} % Added for better list control
 \usepackage{multirow}
 \usepackage{titlesec} % Added to control section spacing
-\usepackage{ebgaramond}
+\usepackage{fontspec}
+\setmainfont{Source Serif Pro}
+\setsansfont{Source Sans Pro}
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+
+\usepackage[bibstyle=cvpubs, citestyle=numeric]{biblatex}
+\addbibresource{cvpubs.bib}
+\highlightname{Stanek}{Jack}
 
 \setcounter{secnumdepth}{0}  % Remove section numbering
 
@@ -14,11 +24,15 @@
 
 \hypersetup{
   colorlinks=true,
-  urlcolor=black,
+  urlcolor=MidnightBlue,
 }
 
 % Command to reduce spacing around all section titles
-\titlespacing*{\section}{0pt}{0.5\baselineskip}{0.3\baselineskip}
+\titlespacing*{\section}{0pt}{0.8\baselineskip}{0.3\baselineskip}
+
+% Sans-serif headings
+\titleformat*{\section}{\Large\sffamily}
+\titleformat*{\subsection}{\large\sffamily}
 
 \begin{document}
 
@@ -68,7 +82,7 @@
             \item Designed a probabilistic programming language with guarded recursion and exact inference; built a program synthesis framework in Rust to learn generative models of tree-like data
             \item Developed a prototype algorithm to construct diverse models of logical formulas, helping proof engineers uncover cognitive blind spots and construct non-obvious counter-examples in verification workflows
         \end{itemize}
-     } \\
+     }\vspace{1em}\\
      \textsc{Jan 2024 -- May 2024} & \textbf{Gradual Information Flow Types with Secure Downgrading} \\
      & \footnotesize (Under the supervision of \href{https://cecchetti.sites.cs.wisc.edu/}{Ethan Cecchetti}) \\
      \multicolumn{2}{L{15cm}}{
@@ -81,9 +95,8 @@
 \end{tabular}
 
 \section{Publications}
-\begin{tabular}{R{4cm}p{11cm}}
-    \textsc{In Submission} & Stochastic Summaries: Characterizing Structured Datasets Using Probabilistic Programs. \textbf{J. Stanek}, A. Murali. [\href{https://jackstanek.github.io/pdf/StochasticSummaries-preprint.pdf}{preprint}]\\
-\end{tabular}
+\nocite{*}
+\printbibliography[heading=none]
 
 \section{Industry Experience}
 
